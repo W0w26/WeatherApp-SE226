@@ -1,5 +1,7 @@
 import tkinter
 import requests
+from PIL import ImageTk, Image
+import os
 from tkinter import messagebox
 from tkinter import Label
 from tkinter import Tk
@@ -74,6 +76,13 @@ output_frame.pack(pady=30)
 output_frame.pack_propagate(0)
 input_frame.pack(pady=15)
 
+img = Image.open("sun.png")
+resize_image = img.resize((100,100))
+image = ImageTk.PhotoImage(resize_image)
+label = Label(image=image)
+label.image = image
+label.pack()
+
 # output frame layout
 city_info_label = tkinter.Label(output_frame, bg=output_color)
 weather_label = tkinter.Label(output_frame, bg=output_color)
@@ -84,6 +93,7 @@ temp_max_label = tkinter.Label(output_frame, bg=output_color,
                                font=('SimSun', 15))
 humidity_label = tkinter.Label(output_frame, bg=output_color)
 photo_label = tkinter.Label(output_frame, bg=output_color)
+
 
 city_info_label.pack(pady=8)
 weather_label.pack()
@@ -115,8 +125,9 @@ dropdown_menu = tkinter.OptionMenu(root,clicked,*dropdown_options)
 dropdown_label = tkinter.Label(input_frame, text='Select a city', font=small_font, bg=input_color)
 get_weather_button = tkinter.Button(input_frame, text='Get Weather', font=large_font, bg=input_color, command=get_weather)
 get_weather_button.grid(row=0, column=1, padx=10, pady=(10, 0))
-
 dropdown_label.grid(row=0, column=0, padx=10, pady=(10, 0))
 dropdown_menu.pack()
 # run root window's main loop
+
+
 root.mainloop()
